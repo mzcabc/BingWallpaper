@@ -1,7 +1,8 @@
 #!/bin/sh
-baseurl="www.bing.com"
-imgurl=$(expr "$(curl -L $baseurl/?mkt=zh-CN | grep hprichbg)" : '.*g_img={url: "\(.*\)",id.*')
+baseUrl="cn.bing.com"
+localDir="/Users/$USER/Pictures/BingWallpaper"
+imgurl=$(expr "$(curl -L $baseUrl | grep hprichbg)" : '.*hprichbg\(.*\)",id.*')
 filename=$(expr "$imgurl" : '.*/\(.*\)')
-localpath="/Users/$USER/Pictures/BingWallpaper/$(date "+%Y-%m-%d")-$filename"
-curl -o $localpath  $baseurl/$imgurl
+localpath="$localDir/$(date "+%Y-%m-%d")-$filename"
+curl -o $localpath  $baseUrl/az/hprichbg/$imgurl
 osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$localpath\""
