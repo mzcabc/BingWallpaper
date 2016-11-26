@@ -1,7 +1,7 @@
 #!/bin/sh
 localDir="/Users/$USER/Pictures/BingWallpaper"
 filenameRegex=".*"$(date "+%Y-%m-%d")".*jpg"
-log=$localDir/log.log
+log="$localDir/bin/log.log"
 
 findResult=$(find $localDir -regex $filenameRegex)
 if [ ! -n "$findResult" ]; then
@@ -11,8 +11,8 @@ if [ ! -n "$findResult" ]; then
     localpath="$localDir/$(date "+%Y-%m-%d")-$filename"
     curl -o $localpath $baseUrl/az/hprichbg/$imgurl
     osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$localpath\""
-    echo "$(date +"%Y-%m-%d %H:%M:%S") Downloaded $filename" >> log
+    echo "$(date +"%Y-%m-%d %H:%M:%S") Downloaded $filename" >> $log
 else
-    echo "$(date +"%Y-%m-%d %H:%M:%S") Exist" >> log
+    echo "$(date +"%Y-%m-%d %H:%M:%S") Exist" >> $log
     exit 0
 fi
