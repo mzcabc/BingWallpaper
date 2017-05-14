@@ -11,6 +11,7 @@ if [ ! -n "$findResult" ]; then
     localpath="$localDir/$(date "+%Y-%m-%d")-$filename"
     curl -o $localpath $baseUrl/az/hprichbg/$imgurl
     osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$localpath\""
+    osascript -e "display notification \"$filename Downloaded\" with title \"BingWallpaper\""
     echo "$(date +"%Y-%m-%d %H:%M:%S") Downloaded $filename" >> $log
 else
     echo "$(date +"%Y-%m-%d %H:%M:%S") Exist" >> $log
