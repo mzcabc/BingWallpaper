@@ -6,10 +6,10 @@ log="$localDir/bin/log.log"
 findResult=$(find $localDir -regex $filenameRegex)
 if [ ! -n "$findResult" ]; then
     baseUrl="cn.bing.com"
-    imgurl=$(expr "$(curl -L $baseUrl | grep hprichbg)" : '.*hprichbg\(.*\)",id.*')
+    imgurl=$(expr "$(curl -L $baseUrl | grep "href=\"\/az\/hprichbg\/rb")" : '.*hprichbg.rb.\(.*jpg\)\"')
     filename=$(expr "$imgurl" : '.*/\(.*\)')
-    localpath="$localDir/$(date "+%Y-%m-%d")-$filename"
-    curl -o $localpath $baseUrl/az/hprichbg/$imgurl
+    localpath="$localDir/$(date "+%Y-%m-%d")-$imgurl"
+    curl -o $localpath $baseUrl/az/hprichbg/rb/$imgurl
     osascript -e "                              \
         tell application \"System Events\" to   \
             tell every desktop to               \
