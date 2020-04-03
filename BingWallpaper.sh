@@ -13,8 +13,8 @@ if [ ! -n "$findResult" ]; then
     baseUrl="cn.bing.com"
     html=$(curl -L $baseUrl)
 
-    imgurl=$(expr "$(echo "$html" | grep "&amp;rf")" : '.*href=\"\(\/th\?id=OHR\.[A-Za-z]*\_ZH\-CN[0-9]*\_1920x1080\.jpg\).*')
-    echo $imgurl
+    imgurl=$(expr "$(echo "$html" | grep "&amp;rf")" : '.*href=\"\(\/th\?id=OHR\.[A-Za-z0-9]*\_ZH\-CN[0-9]*\_1920x1080\.jpg\).*')
+    echo img $imgurl
     filename=$(expr "$imgurl" : '.*OHR\.\(.*\)')
     echo $filename
     localpath="$localDir/$(date "+%Y-%m-%d")-$filename"
