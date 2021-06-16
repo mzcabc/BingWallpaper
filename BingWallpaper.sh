@@ -18,7 +18,7 @@ if [ ! -n "$findResult" ]; then
     filename=$(expr "$imgurl" : '.*OHR\.\(.*\)')
     echo $filename
     localpath="$localDir/$(date "+%Y-%m-%d")-$filename"
-    curl -o $localpath $baseUrl/$imgurl
+    curl -o $localpath -H 'Cache-Control: no-cache' $baseUrl/$imgurl
 
     des=$(expr "$(echo "$html" | grep "id=\"sh_cp\" class=\"sc_light\"")" : '.*id=\"sh_cp\".*title=\"\(.*\)\" aria-label=\"主页图片信息\"')
 
